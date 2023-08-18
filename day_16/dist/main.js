@@ -1,60 +1,80 @@
-// "use strict";
-console.log("Hello world");
-
-// function normal() {
-//   const user = {
-//     name: "Pratham",
-//     hobby: () => {
-//       console.log(this);
-//       //   console.log(...arguments);
-//     },
-//     //   hobby2: function () {
-//     //     console.log(this);
-//     //     console.log(...arguments);
-//     //   },
-//   };
-//   user.hobby();
-// }
-
-// user.hobby2(1, 2, 3, 4);
-// user.hobby(1, 2, 3, 4);
-
-// normal();
-
-// const user = {
-//   name: "Pratham",
-//   hobby: () => {
-//     console.log(this.name);
-//     //   console.log(...arguments);
-//   },
-// };
-
-// user.hobby.call(user);
-// user.hobby.apply(user);
-// user.hobby.bind(user);
-
-let a = 10;
-function simpleInvocation() {
-  console.log(this);
+"use strict";
+// think use case of satisfies keyword in typescript
+// extending types
+Object.defineProperty(exports, "__esModule", { value: true });
+//bigint
+function convertToBinary(x) {
+    let bin = 0n;
+    let rem, i = 1n, step = 1n;
+    while (x != 0n) {
+        rem = x % 2n;
+        x = (x / 2n);
+        bin = bin + rem * i;
+        i = i * 10n;
+    }
+    console.log(`Binary: ${bin}`);
 }
-simpleInvocation();
-
-// Method Invocation
-const methodInvocation = {
-  a: 10,
-  method() {
-    console.log(this);
-  },
+convertToBinary(8n);
+function convertToBinaryNormal(x) {
+    let bin = 0;
+    let rem, i = 1;
+    while (x != 0) {
+        rem = x % 2;
+        x = x / 2;
+        bin = bin + rem * i;
+        i = i * 10;
+    }
+    console.log(`Binary: ${bin}`);
+}
+convertToBinaryNormal(7890678);
+const routes = {
+    AUTH: {
+        path: "/auth",
+    },
 };
-methodInvocation.method();
-
-// Indirect Invocation
-const context = { value1: "A", value2: "B" };
-function indirectInvocation() {
-  console.log(arguments);
-  console.log(this);
+routes.Nonsense.path;
+const routes2 = {
+    AUTH: {
+        path: '/auth',
+        nonsense: 'key'
+    },
+};
+//truthy values
+if (true)
+    if ({})
+        if ([])
+            if (42)
+                if ("0")
+                    if ("false")
+                        if (new Date())
+                            if (-42)
+                                if (12n)
+                                    if (3.14)
+                                        if (-3.14)
+                                            if (Infinity)
+                                                if (-Infinity)
+                                                    //falsy values
+                                                    if (false) {
+                                                        // Not reachable
+                                                    }
+if (null) {
+    // Not reachable
 }
-indirectInvocation.call(context, 10, 20);
-indirectInvocation.apply(context, [10, 20]);
-const result = indirectInvocation.bind(context);
-result();
+if (undefined) {
+    // Not reachable
+}
+if (0) {
+    // Not reachable
+}
+if (-0) {
+    // Not reachable
+}
+if (0n) {
+    // Not reachable
+}
+if (NaN) {
+    // Not reachable
+}
+if ("") {
+    // Not reachable
+}
